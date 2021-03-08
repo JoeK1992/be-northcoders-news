@@ -9,7 +9,9 @@
     "test": "jest",
     "migrate-make": "knex migrate:make",
     "migrate-latest": "knex migrate:latest",
-    "migrate-rollback": "knex migrate:rollback"
+    "migrate-rollback": "knex migrate:rollback",
+    "query": "psql -f query.sql > output.txt",
+    "utils-test": "jest db/utils/data-manipulation.test.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,5 @@
     "pg": "^8.5.1",
     "sorted": "^0.1.1",
     "supertest": "^6.1.3"
-  },
-  "devDependencies": {}
+  }
 }

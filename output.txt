@@ -1,0 +1,16 @@
+You are now connected to database "nc_news" as user "gary".
+               List of relations
+ Schema |         Name         | Type  | Owner 
+--------+----------------------+-------+-------
+ public | articles             | table | gary
+ public | comments             | table | gary
+ public | knex_migrations      | table | gary
+ public | knex_migrations_lock | table | gary
+ public | topics               | table | gary
+ public | users                | table | gary
+(6 rows)
+
+ username | avatar_url | name 
+----------+------------+------
+(0 rows)
+
