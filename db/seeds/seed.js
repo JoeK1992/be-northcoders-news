@@ -27,15 +27,14 @@ exports.seed = function (knex) {
       return knex("articles").insert(articles).returning("*");
     })
     .then(() => {
-      console.log(commentData);
-
       const referenceObj = createReferenceObj(
-        userData,
+        commentData,
         articleData,
-        commentData
+        "belongs_to",
+        "article_id"
       );
 
-      const comments = formatComments(commentData);
+      const comments = formatComments(commentData, referenceObj);
 
       // {
       //   body: 'Corporis magnam placeat quia nulla illum nisi. Provident magni aut et earum illo labore aperiam. Dolorem ipsum dignissimos est ex. Minima voluptatibus nihil commodi veritatis. Magnam aut suscipit dignissimos nostrum ea.',

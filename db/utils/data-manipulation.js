@@ -8,19 +8,27 @@ const formatArticles = (articlesRawData) => {
   return articleData;
 };
 
-const createReferenceObj = (usersRawData, ArticlesRawData, commentsRawData) => {
-  return {};
-
-  // output
-  // {author: user.username,
-  // article_id: articles.article_id}
-
-  // author for comments that references users username
-  // article id which references articles article id
+const createReferenceObj = (commentsRawData, articlesRawData, key, value) => {
+  const refObject = {};
+  if (commentsRawData.length === 0 || articlesRawData.length === 0) {
+    return refObject;
+  } else {
+    commentsRawData.forEach((element) => {
+      const refKey = element[key];
+      articlesRawData.forEach((article) => {
+        if (article.title === refKey) {
+          const refValue = article[value];
+          refObject[refKey] = refValue;
+        }
+      });
+    });
+    return refObject;
+  }
 };
 
-const formatComments = (commentsRawData) => {
+const formatComments = (commentsRawData, referenceObj) => {
   return [];
+  console.log(commentsRawData);
 };
 
 module.exports = { formatArticles, formatComments, createReferenceObj };
