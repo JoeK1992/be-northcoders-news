@@ -1,4 +1,8 @@
-const (formatArticles) = require("../utils/data-manipulation")
+const {
+  formatArticles,
+  formatComments,
+  createReferenceObj,
+} = require("../utils/data-manipulation");
 
 const {
   topicData,
@@ -14,33 +18,34 @@ exports.seed = function (knex) {
     .then(() => {
       return knex("topics").insert(topicData).returning("*");
     })
-    .then((insertedTopics) => {
-      // console.log(insertedTopics);
-      // console.log(articleData, "***********88");
-
-      // invoke function that returns everything
-      // but converts inputted time into right format
-
-      const articles = formatArticles(articleRawData);
+    .then(() => {
+      return knex("users").insert(userData).returning("*");
+    })
+    .then(() => {
+      const articles = formatArticles(articleData);
 
       return knex("articles").insert(articles).returning("*");
-
-      // function that takes insertedTopics
-      // take article data
-      // return the correctly formatted array
-      // insert array into articles table
-
-      // topic field, topicData,
-
-      // article_id which is the primary key - DONE
-      // title - DONE
-      // body - DONE
-      // votes defaults to 0 - DONE
-      // topic field which references the slug in the topics table
-      // author field that references a user's primary key (username) - DONE
-      // created_at defaults to the current timestamp - DONE
     })
-    .then((insertedTopics) => {
-      return knex("users").insert(userData).returning("*");
+    .then(() => {
+      console.log(commentData);
+
+      const referenceObj = createReferenceObj(
+        userData,
+        articleData,
+        commentData
+      );
+
+      const comments = formatComments(commentData);
+
+      // {
+      //   body: 'Corporis magnam placeat quia nulla illum nisi. Provident magni aut et earum illo labore aperiam. Dolorem ipsum dignissimos est ex. Minima voluptatibus nihil commodi veritatis. Magnam aut suscipit dignissimos nostrum ea.',
+      //   belongs_to: 'A BRIEF HISTORY OF FOOD—NO BIG DEAL',
+      //   created_by: 'weegembump',
+      //   votes: 3,
+      //   created_at: 1504946266488
+      // },
+
+      // NEED TO ADD AUTHOR
+      // NEED TO ADD ARTICLE ID
     });
 };

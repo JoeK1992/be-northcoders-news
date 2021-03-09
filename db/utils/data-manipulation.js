@@ -1,15 +1,26 @@
-const formatArticles = (articleRawData) => {
-  // const WRONG = articleRawData[0].created_at;
+const formatArticles = (articlesRawData) => {
+  const articleData = articlesRawData.map((article) => {
+    const articleClone = { ...article };
+    const timestamp = new Date(articleClone.created_at);
+    articleClone.created_at = timestamp;
+    return articleClone;
+  });
+  return articleData;
+};
 
-  // console.log(WRONG, "***");
+const createReferenceObj = (usersRawData, ArticlesRawData, commentsRawData) => {
+  return {};
 
-  // const timestamp = new Date(WRONG).toISOString();
+  // output
+  // {author: user.username,
+  // article_id: articles.article_id}
 
-  // console.log(timestamp);
+  // author for comments that references users username
+  // article id which references articles article id
+};
 
-  // take created_at, change to ISOString and return without mutating original
-
+const formatComments = (commentsRawData) => {
   return [];
 };
 
-module.exports = { formatArticles };
+module.exports = { formatArticles, formatComments, createReferenceObj };
