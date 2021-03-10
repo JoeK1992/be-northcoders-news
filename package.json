@@ -11,7 +11,8 @@
     "migrate-latest": "knex migrate:latest",
     "migrate-rollback": "knex migrate:rollback",
     "query": "psql -f query.sql > output.txt",
-    "utils-test": "jest db/utils/data-manipulation.test.js"
+    "utils-test": "jest db/utils/data-manipulation.test.js",
+    "app-test": "jest /app.test.js"
   },
   "repository": {
     "type": "git",

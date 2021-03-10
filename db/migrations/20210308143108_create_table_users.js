@@ -1,5 +1,4 @@
 exports.up = function (knex) {
-  console.log("Created users table");
   return knex.schema.createTable("users", (usersTable) => {
     usersTable.string("username").primary();
     usersTable.string("avatar_url").notNullable();

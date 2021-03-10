@@ -233,7 +233,7 @@ describe("formatComments", () => {
         created_at: 1511354163389,
       },
     ];
-    const referenceObject = { "They're not exactly dogs, are they?": 6 };
+    const referenceObj = { "They're not exactly dogs, are they?": 6 };
     const actual = formatComments(input, referenceObj);
 
     expect(Array.isArray(actual)).toBe(true);
@@ -245,4 +245,106 @@ describe("formatComments", () => {
       article_id: expect.any(Number),
     });
   });
+  it("Returns correct data types for a multiple inputs", () => {
+    const input = [
+      {
+        body:
+          "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+        belongs_to: "They're not exactly dogs, are they?",
+        created_by: "butter_bridge",
+        votes: 16,
+        created_at: 1511354163389,
+      },
+      {
+        body:
+          "Replacing the quiet elegance of the dark suit and tie with the casual indifference of these muted earth tones is a form of fashion suicide, but, uh, call me crazy — onyou it works.",
+        belongs_to: "Living in the shadow of a great man",
+        created_by: "icellusedkars",
+        votes: 100,
+        created_at: 1448282163389,
+      },
+    ];
+    const referenceObj = {
+      "They're not exactly dogs, are they?": 6,
+      "Living in the shadow of a great man": 4,
+    };
+    const actual = formatComments(input, referenceObj);
+
+    expect(Array.isArray(actual)).toBe(true);
+    expect(actual[1]).toMatchObject({
+      body: expect.any(String),
+      votes: expect.any(Number),
+      created_at: expect.any(Object),
+      author: expect.any(String),
+      article_id: expect.any(Number),
+    });
+  });
+  it("Does not mutate the input array", () => {
+    const input = [
+      {
+        body:
+          "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+        belongs_to: "They're not exactly dogs, are they?",
+        created_by: "butter_bridge",
+        votes: 16,
+        created_at: 1511354163389,
+      },
+    ];
+    const referenceObj = { "They're not exactly dogs, are they?": 6 };
+    const output = formatComments(input, referenceObj);
+    expect(output).not.toBe(input);
+    expect(input).toEqual([
+      {
+        body:
+          "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+        belongs_to: "They're not exactly dogs, are they?",
+        created_by: "butter_bridge",
+        votes: 16,
+        created_at: 1511354163389,
+      },
+    ]);
+  });
+  it("Does not mutate objects in input array", () => {
+    const input = [
+      {
+        body:
+          "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+        belongs_to: "They're not exactly dogs, are they?",
+        created_by: "butter_bridge",
+        votes: 16,
+        created_at: 1511354163389,
+      },
+    ];
+    const referenceObj = { "They're not exactly dogs, are they?": 6 };
+    const output = formatComments(input, referenceObj);
+    expect(output[0]).not.toBe(input[0]);
+    expect(input[0]).toEqual({
+      body:
+        "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+      belongs_to: "They're not exactly dogs, are they?",
+      created_by: "butter_bridge",
+      votes: 16,
+      created_at: 1511354163389,
+    });
+  });
+  it("Does not mutate reference object", () => {
+    const input = [
+      {
+        body:
+          "Oh, I've got compassion running out of my nose, pal! I'm the Sultan of Sentiment!",
+        belongs_to: "They're not exactly dogs, are they?",
+        created_by: "butter_bridge",
+        votes: 16,
+        created_at: 1511354163389,
+      },
+    ];
+    const referenceObj = { "They're not exactly dogs, are they?": 6 };
+    formatComments(input, referenceObj);
+    expect(referenceObj).toEqual({ "They're not exactly dogs, are they?": 6 });
+  });
 });
+
+// multiple inputs
+// mutates array
+// mutates objects
+// mutates refobj

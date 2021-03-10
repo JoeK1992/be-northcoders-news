@@ -27,8 +27,31 @@ const createReferenceObj = (commentsRawData, articlesRawData, key, value) => {
 };
 
 const formatComments = (commentsRawData, referenceObj) => {
-  return [];
-  console.log(commentsRawData);
+  const formattedComments = commentsRawData.map((comment) => {
+    const clonedComment = { ...comment };
+    const key = clonedComment.belongs_to;
+    const value = referenceObj[key];
+    clonedComment.article_id = value;
+    delete clonedComment.belongs_to;
+    clonedComment.author = clonedComment.created_by;
+    delete clonedComment.created_by;
+    clonedComment.created_at = new Date(clonedComment.created_at);
+    return clonedComment;
+  });
+
+  return formattedComments;
+
+  // if (commentsRawData.length === 0) return [];
+  // const key = commentsRawData[0].belongs_to;
+  // const value = referenceObj[key];
+
+  // commentsRawData[0].article_id = value;
+  // delete commentsRawData[0].belongs_to;
+  // commentsRawData[0].author = commentsRawData[0].created_by;
+  // delete commentsRawData[0].created_by;
+  // commentsRawData[0].created_at = new Date(commentsRawData[0].created_at);
+
+  // return commentsRawData;
 };
 
 module.exports = { formatArticles, formatComments, createReferenceObj };
