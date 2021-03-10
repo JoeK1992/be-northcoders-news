@@ -8,20 +8,17 @@ const formatArticles = (articlesRawData) => {
   return articleData;
 };
 
-const createReferenceObj = (commentsRawData, articlesRawData, key, value) => {
+const createReferenceObj = (array, key, value) => {
   const refObject = {};
-  if (commentsRawData.length === 0 || articlesRawData.length === 0) {
+  if (array.length === 0) {
     return refObject;
   } else {
-    commentsRawData.forEach((element) => {
+    array.forEach((element) => {
       const refKey = element[key];
-      articlesRawData.forEach((article) => {
-        if (article.title === refKey) {
-          const refValue = article[value];
-          refObject[refKey] = refValue;
-        }
-      });
+      const refValue = element[value];
+      refObject[refKey] = refValue;
     });
+
     return refObject;
   }
 };
@@ -30,8 +27,8 @@ const formatComments = (commentsRawData, referenceObj) => {
   const formattedComments = commentsRawData.map((comment) => {
     const clonedComment = { ...comment };
     const key = clonedComment.belongs_to;
-    const value = referenceObj[key];
-    clonedComment.article_id = value;
+    const article_id = referenceObj[key];
+    clonedComment.article_id = article_id;
     delete clonedComment.belongs_to;
     clonedComment.author = clonedComment.created_by;
     delete clonedComment.created_by;

@@ -26,4 +26,21 @@ describe("/api", () => {
       });
     });
   });
+  describe("Users", () => {
+    describe("Get user by username", () => {
+      it("status:200 and returns user object", () => {
+        return request(app)
+          .get("api/users/lurker")
+          .expect(200)
+          .then(({ body }) => {
+            expect({ body }).toEqual({
+              username: "lurker",
+              name: "do_nothing",
+              avatar_url:
+                "https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
+            });
+          });
+      });
+    });
+  });
 });

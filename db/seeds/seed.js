@@ -16,24 +16,22 @@ exports.seed = function (knex) {
     .rollback()
     .then(() => knex.migrate.latest())
     .then(() => {
-      return knex("topics").insert(topicData).returning("*");
+      return knex("topics").insert(topicData);
     })
     .then(() => {
-      return knex("users").insert(userData).returning("*");
+      return knex("users").insert(userData);
     })
     .then(() => {
       const articles = formatArticles(articleData);
 
       return knex("articles").insert(articles).returning("*");
     })
-    .then(() => {
+    .then((articleRows) => {
       const referenceObj = createReferenceObj(
-        commentData,
-        articleData,
-        "belongs_to",
+        articleRows,
+        "title",
         "article_id"
       );
-
       const comments = formatComments(commentData, referenceObj);
       return knex("comments").insert(comments);
     });
