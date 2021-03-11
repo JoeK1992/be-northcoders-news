@@ -27,13 +27,31 @@ describe("/api", () => {
     });
   });
   describe("Users", () => {
-    describe("Get user by username", () => {
-      it("status:200 and returns user object", () => {
+    describe("Get users", () => {
+      test("status:200 and returns user object", () => {
         return request(app)
-          .get("api/users/lurker")
+          .get("/api/users")
           .expect(200)
-          .then(({ body }) => {
-            expect({ body }).toEqual({
+          .then(({ body: { users } }) => {
+            expect(Array.isArray(users)).toBe(true);
+            expect(users.length).toBe(4);
+            users.forEach((users) => {
+              expect(users).toMatchObject({
+                username: expect.any(String),
+                name: expect.any(String),
+                name: expect.any(String),
+              });
+            });
+          });
+      });
+    });
+    describe("Get user by username", () => {
+      test.only("status:200 and returns correct user object", () => {
+        return request(app)
+          .get("/api/users/lurker")
+          .expect(200)
+          .then(({ body: { user } }) => {
+            expect(...user).toEqual({
               username: "lurker",
               name: "do_nothing",
               avatar_url:

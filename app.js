@@ -4,6 +4,4 @@ const app = express();
 
 app.use("/api", apiRouter);
 
-// app.use(errorHandlingFunction)
-
 module.exports = app;
