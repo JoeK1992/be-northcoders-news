@@ -10,7 +10,8 @@ exports.getUserByUsername = (req, res, next) => {
   const { username } = req.params;
   fetchUserByUsername(username)
     .then((user) => {
-      if (user.length === 0) {
+      console.log(user);
+      if (!user) {
         res.status(404).send({ msg: "User not found" });
       } else {
         res.status(200).send({ user });

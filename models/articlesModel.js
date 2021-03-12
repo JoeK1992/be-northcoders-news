@@ -6,10 +6,7 @@ exports.fetchArticleByArticleID = (article_id) => {
     .from("articles")
     .where({ article_id })
     .then(([article]) => {
-      if (article.length === 0) res.status(404).send({ msg: "Not found" });
-      else {
-        return article;
-      }
+      return article;
     });
 };
 

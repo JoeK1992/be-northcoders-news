@@ -7,7 +7,7 @@ exports.getArticleByArticleID = (req, res, next) => {
   const { article_id } = req.params;
   fetchArticleByArticleID(article_id)
     .then((article) => {
-      if (article.length === 0) {
+      if (!article) {
         res.status(404).send({ msg: "Article not found" });
       } else {
         res.status(200).send({ article });
