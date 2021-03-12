@@ -5,11 +5,11 @@ const {
   handleCustomErrors,
   handlePsqlErrors,
   handleServerErrors,
-} = require("./errorHandlingFunctions");
+} = require("./errorHandlingFunctions/errorFunctions");
 
 app.use("/api", apiRouter);
 
-app.use(handleCustomErrors);
+// app.use(handleCustomErrors);
 app.use(handlePsqlErrors);
 app.use(handleServerErrors);
 

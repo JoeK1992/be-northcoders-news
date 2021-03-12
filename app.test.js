@@ -88,12 +88,14 @@ describe("/api", () => {
   });
   describe("Errors", () => {
     describe("400 errors", () => {
-      return request(app)
-        .get("api/articles/pidgeon")
-        .expect(400)
-        .then(({ body }) => {
-          expect(body.msg).toBe("Invalid article ID");
-        });
+      test("Invalid article ID", () => {
+        return request(app)
+          .get("/api/articles/pidgeon")
+          .expect(400)
+          .then(({ body }) => {
+            expect(body.msg).toBe("Bad request");
+          });
+      });
     });
   });
 });
