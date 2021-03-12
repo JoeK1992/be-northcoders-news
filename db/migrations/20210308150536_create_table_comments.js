@@ -10,6 +10,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  // console.log("Removed comments table");
   return knex.schema.dropTable("comments");
 };
