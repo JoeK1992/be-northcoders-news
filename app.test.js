@@ -97,5 +97,23 @@ describe("/api", () => {
           });
       });
     });
+    describe("404 errors", () => {
+      test("Article ID does not exist", () => {
+        return request(app)
+          .get("/api/articles/106")
+          .expect(404)
+          .then(({ body }) => {
+            expect(body.msg).toBe("Article not found");
+          });
+      });
+    });
+    test("Username does not exist", () => {
+      return request(app)
+        .get("/api/users/Bob")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("User not found");
+        });
+    });
   });
 });
