@@ -208,7 +208,7 @@ describe("formatComments", () => {
   it("Returns an empty array when passed an empty array", () => {
     expect(formatComments([])).toEqual([]);
   });
-  it.only("Returns correct data types for a single input", () => {
+  it("Returns correct data types for a single input", () => {
     const input = [
       {
         body:

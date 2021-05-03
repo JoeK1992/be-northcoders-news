@@ -2,7 +2,6 @@ const express = require("express");
 const apiRouter = require("./routes/apiRouter");
 const app = express();
 const {
-  handleCustomErrors,
   handlePsqlErrors,
   handleServerErrors,
 } = require("./errorHandlingFunctions/errorFunctions");

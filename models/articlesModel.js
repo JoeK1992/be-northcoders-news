@@ -1,4 +1,25 @@
-const dbConnection = require("../dbConnection");
+const dbConnection = require("../db/dbConnection");
+
+exports.fetchArticles = (sort_by, order, author, topic) => {
+  return dbConnection
+    .select(
+      "articles.article_id",
+      "articles.title",
+      "articles.created_at",
+      "articles.votes",
+      "articles.topic",
+      "articles.author"
+    )
+    .count({ comment_count: "comment_id" })
+    .from("articles")
+    .orderBy(sort_by || "created_at", order || "desc")
+    .modify((query) => {
+      if (author) query.where({ "articles.author": author });
+      if (topic) query.where({ "articles.topic": topic });
+    })
+    .leftJoin("comments", "comments.article_id", "articles.article_id")
+    .groupBy("articles.article_id");
+};
 
 exports.fetchArticleByArticleID = (article_id) => {
   return dbConnection
@@ -19,4 +40,8 @@ exports.modifyArticleVotes = (article_id, votes) => {
     .then(([article]) => {
       return article;
     });
+};
+
+exports.removeArticle = (article_id) => {
+  return dbConnection("articles").where({ article_id }).del();
 };

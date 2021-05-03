@@ -9,3 +9,7 @@ exports.handleServerErrors = (err, req, res, next) => {
   console.log(err);
   res.status(500).send({ msg: "Internal server error" });
 };
+
+exports.handle405Errors = (req, res, next) => {
+  res.status(405).send({ msg: "Method not allowed" });
+};

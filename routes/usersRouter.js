@@ -5,8 +5,10 @@ const {
   getUserByUsername,
 } = require("../controllers/usersController");
 
+const { handle405Errors } = require("../errorHandlingFunctions/errorFunctions");
+
 usersRouter.route("/").get(getUsers);
 
-usersRouter.route("/:username").get(getUserByUsername);
+usersRouter.route("/:username").get(getUserByUsername).all(handle405Errors);
 
 module.exports = usersRouter;

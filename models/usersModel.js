@@ -1,4 +1,4 @@
-const dbConnection = require("../dbConnection");
+const dbConnection = require("../db/dbConnection");
 
 exports.fetchUsers = () => {
   return dbConnection.select("*").from("users");
