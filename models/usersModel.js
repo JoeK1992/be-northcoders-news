@@ -13,3 +13,7 @@ exports.fetchUserByUsername = (username) => {
       return user;
     });
 };
+
+exports.addUser = (addedUser) => {
+  return dbConnection("users").insert(addedUser, "*");
+};

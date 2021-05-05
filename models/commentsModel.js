@@ -1,4 +1,5 @@
 const dbConnection = require("../db/dbConnection");
+const getArticleByArticleID = require("../controllers/articlesController");
 
 exports.fetchCommentsByArticleID = (article_id, sort_by, order) => {
   return dbConnection("comments")
@@ -21,4 +22,8 @@ exports.modifyCommentVotes = (comment_id, votes) => {
 
 exports.addComment = (addedComment) => {
   return dbConnection("comments").insert(addedComment, "*");
+};
+
+exports.removeComment = (comment_id) => {
+  return dbConnection("comments").where({ comment_id }).del();
 };
