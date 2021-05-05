@@ -5,8 +5,6 @@ const articlesRouter = require("./articlesRouter");
 const commentsRouter = require("./commentsRouter");
 const { fetchAllEndpoints } = require("../endpointsJSONfunction");
 
-apiRouter.route("/").get(fetchAllEndpoints);
-
 apiRouter.use("/topics", topicsRouter);
 
 apiRouter.use("/users", usersRouter);
