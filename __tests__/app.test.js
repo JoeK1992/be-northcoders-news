@@ -26,7 +26,7 @@ describe("Happy paths /api", () => {
       });
     });
     describe("POST a new topic", () => {
-      test.only("Status:201 - posts a topic and returns it as a single object", () => {
+      test("Status:201 - posts a topic and returns it as a single object", () => {
         return request(app)
           .post("/api/topics")
           .send({ slug: "northcoders", description: "northcoders topic" })
