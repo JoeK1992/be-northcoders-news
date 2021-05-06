@@ -10,7 +10,7 @@ const {
 
 app.use(express.json());
 
-app.use("", fetchAllEndpoints);
+// app.use("", fetchAllEndpoints);
 
 app.use("/api", apiRouter);
 
