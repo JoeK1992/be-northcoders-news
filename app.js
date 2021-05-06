@@ -8,9 +8,20 @@ const {
   handleServerErrors,
 } = require("./errorHandlingFunctions/errorFunctions");
 
-app.use(express.json());
+app.get("", (req, res) => {
+  request(
+    { url: "https://be-nc-news-jk.herokuapp.com" },
+    (error, response, body) => {
+      if (error || response.statusCode !== 200) {
+        return res.status(500).json({ type: "error", message: err.message });
+      }
 
-// app.use("", fetchAllEndpoints);
+      res.json(JSON.parse(body));
+    }
+  );
+});
+
+app.use(express.json());
 
 app.use("/api", apiRouter);
 
