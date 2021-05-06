@@ -4,6 +4,7 @@ const usersRouter = require("./usersRouter");
 const articlesRouter = require("./articlesRouter");
 const commentsRouter = require("./commentsRouter");
 const handle405Errors = require("../errorHandlingFunctions/errorFunctions");
+const getApiJSON = require("../controllers/apiController");
 
 apiRouter.use("/topics", topicsRouter);
 
