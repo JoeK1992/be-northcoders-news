@@ -1,14 +1,16 @@
 const express = require("express");
 const apiRouter = require("./routes/apiRouter");
-const cors = require("cors");
+const fetchAllEndpoints = require("./endpointsJSONfunction");
+
 const app = express();
 const {
   handlePsqlErrors,
   handleServerErrors,
 } = require("./errorHandlingFunctions/errorFunctions");
-app.use(cors());
-app.use(express.static("public"));
+
 app.use(express.json());
+
+app.use("", fetchAllEndpoints);
 
 app.use("/api", apiRouter);
 
