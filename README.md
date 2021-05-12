@@ -23,7 +23,7 @@ npm test
 1. cors
 2. express.js
 3. jest test suite
-4. jest sorted
+4. jest-sorted
 5. supertest
 6. knex
 7. postgres
