@@ -1,5 +1,7 @@
 const articlesRouter = require("express").Router();
 
+console.log("in articles router");
+
 const {
   getArticles,
   getArticleByArticleID,

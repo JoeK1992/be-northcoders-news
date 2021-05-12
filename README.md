@@ -1,6 +1,6 @@
-# Welcome to be-nc-news 👋
+# Welcome to NC-News 👋
 
-> A back-end server for a news website. This was created during the Northcoders bootcamp.
+> A back-end server for a Northcoders News website. This was created during the Northcoders bootcamp.
 
 ### 🏠 [Homepage](https://github.com/JoeK1992/be-nc-news)
 
@@ -14,7 +14,19 @@ npm install
 
 ```sh
 npm test
+
+
 ```
+
+## Tech
+
+1. cors
+2. express.js
+3. jest test suite
+4. jest sorted
+5. supertest
+6. knex
+7. postgres
 
 ## Author
 
@@ -25,12 +37,4 @@ npm test
 
 # Endpoints
 
-All available endpoints are detailed at "/api"
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
----
-
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+All available endpoints are detailed at https://be-nc-news-jk.herokuapp.com/api Or launch using the command heroku open and append /api to the url.

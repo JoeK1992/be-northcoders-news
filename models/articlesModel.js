@@ -53,6 +53,7 @@ exports.addArticle = (addedArticle) => {
 };
 
 exports.fetchPaginatedArticles = (limit, page) => {
+  console.log("in getPaginated");
   return dbConnection("articles").paginate({
     perPage: limit,
     currentPage: page,
